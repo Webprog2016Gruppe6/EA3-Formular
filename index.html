@@ -12,20 +12,30 @@
 		<section>
 			<form id="rezeptform" action="index.html" method="post">
 				<p>
+					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben -->
 					<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
 					<label for="rezeptname">Rezeptname</label>
 				</p>
 				<p>
+					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben ; required = Pflichfeld -->
 					<input id="autorname" name="autorname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{1,}" required>
 					<label for="autorname">Autor</label>
 				</p>
 				<p>
-					<select name="speisetyp" size="2" multiple>
-						<option value="suess"> süß <option value="herzhaft"> herzhaft <option value="ssauer"> sauer <option value="geschmacklos"> geschmacklos <option value="scharf"> scharf <option value="herb"> herb <option value="mild"> mild
+					<!--size: nur ein wert sichtbar, multiple: Mehrere Werte auswählbar -->
+					<select id="speisetyp" name="speisetyp" size="7" multiple>
+						<option value="suess"> süß
+						<option value="herzhaft"> herzhaft
+						<option value="sauer"> sauer
+						<option value="geschmacklos"> geschmacklos
+						<option value="scharf"> scharf
+						<option value="herb"> herb
+						<option value="mild"> mild
 					</select>
 					<label for="speisetyp">Speisetyp</label>
 				</p>
 				<p>
+					<!-- Voespeise hat drei Optionen -->
 					<input id="sa" class="radiobutton"  name="speiseart" type="radio" value="vorspeise">
 					Vorspeise
 					<input class="radiobutton"  name="speiseart" type="radio" value="hauptspeise">
@@ -34,7 +44,8 @@
 					Dessert <label for="sa">Speiseart </label>
 				</p>
 				</p>
-				<p>
+				<p> <!-- durch type='number' können nur Zahlen angegeben werden, min/max legen Unter/Obergrenze fest, step die Schrittweite:
+				          dafurch kann man nur Zahlen von 1...8 eingeben -->
 					<label>Anzahl der Zutaten</label>
 					<input id="zutaten" type="number" min="1" max="8" step="1" />
 				</p>
@@ -49,6 +60,7 @@
 						<option value="FUTTERKISTE" label="München 089/112233">
 					</datalist>
 				</p>
+				<!-- Schnipp - TEST: BITTE ENTFERNEN -->
 				<p>
 					        <legend>Passwort bestätigen</legend>
         <label for="password1">Passwort:</label>
@@ -57,6 +69,7 @@
         <label for="password2">Passwort bestätigen:</label>
         <input type="password" required id="password2" />
 				</p>
+				<!-- Schnapp -->
 				<p>
 					<button id="submit">Abschicken</button>
 				</p>
@@ -70,7 +83,27 @@
 	var password2 = document.getElementById('password2');
 	var autorname = document.getElementById('autorname');
 	var zutaten = document.getElementById('zutaten');
-	
+	var speisetyp = document.getElementById('speisetyp');
+
+	var checkSpeiseTypValidity = function () {
+		var zaehler = 0;
+		for (var i = 0; i < speisetyp.length; i++){
+			if (speisetyp[i].selected){
+				zaehler++;
+				console.log(i + ". Element selected");
+			}
+			if (zaehler > 2){
+				speisetyp.setCustomValidity('Maximal zwei Werte zulässig');
+				speisetyp.disabled=true;
+				console.log("Zu viel ausgewählt");
+			}else{
+				speisetyp.setCustomValidity('');
+				speisetyp.disabled=false;
+			}
+		}
+		console.log("Es ändert sich was in der select-Box");
+	};
+
 	var checkPasswordValidity = function () {
 		if (password1.value != password2.value) {
 			password2.setCustomValidity('Passwörter müssen übereinstimmen!');
@@ -82,10 +115,10 @@
 	var checkAutorValidity = function () {
 		if (autorname.value == '') {
 			autorname.setCustomValidity('Nicht leer Lassen');
-			console.log("A");
+			console.log("Autor ausgefüllt");
 		} else{
-			autorname.setCustomValidity('Leer Lassen');
-			console.log("B");
+			//autorname.setCustomValidity('Leer Lassen');
+			console.log("Autor leer gelassen");
 		}
 	};
 	
@@ -103,6 +136,7 @@
 	password2.addEventListener('change', checkPasswordValidity);
 	autorname.addEventListener('change', checkAutorValidity);
 	zutaten.addEventListener('change', checkZutatenValidity);
+	speisetyp.addEventListener('change', checkSpeiseTypValidity);
 	
 
 
