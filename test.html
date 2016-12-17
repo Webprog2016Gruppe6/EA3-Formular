@@ -1,0 +1,22 @@
+        <p>
+            <input class="radiobutton"  name="speisetyp" type="radio" value="suess"> süß
+            <input class="radiobutton"  name="speisetyp" type="radio" value="suesssauer"> süß-sauer
+            <input class="radiobutton"  name="speisetyp" type="radio" value="herzhaft"> herzhaft
+            <input class="radiobutton"  name="speisetyp" type="radio" value="geschmacklos"> geschmacklos
+            <input class="radiobutton"  name="speisetyp" type="radio" value="scharf"> scharf
+            <input class="radiobutton"  name="speisetyp" type="radio" value="herb"> herb
+            <input class="radiobutton"  name="speisetyp" type="radio" value="mild"> mild
+            <label for="radiobutton">Speisetyp</label>
+        </p>
+                <p>
+            <input id="sa" name="speiseart" value="Vorspeise" type="text" pattern="Vorspeise|Hauptspeise|Dessert" required>
+            <span class="hint">(Wähle aus: Vorspeise, Hauptspeise oder Dessert)</span>
+            <label for="sa">Speiseart </label>
+        </p>
+        
+        <p>
+            <input id="zeigeAnzahl" type="text" value="1">
+            <input id="zt" name="zutat" type="range" min="1" max="8" step="1" value ="1" oninput="javascript:document.getElementById('zeigeAnzahl').value = document.getElementById('zt').value;" >
+            <span class="hint">(Wähle max. 8)</span>
+            <label for="zt">Anzahl der Zutaten</label>
+        </p>

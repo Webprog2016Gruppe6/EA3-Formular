@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Aufgabe Rezepteerfassung</title>
+		<link rel="stylesheet" href="aufgabeRezepte.css" type="text/css" />
+	</head>
+	<body>
+		<header>
+			<h1>Rezepteerfassung</h1>
+		</header>
+		<section>
+			<form id="rezeptform" action="index.html" method="post">
+				<p>
+					<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
+					<label for="rezeptname">Rezeptname</label>
+				</p>
+				<p>
+					<input id="autorname" name="autorname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{1,}" required>
+					<label for="autorname">Autor</label>
+				</p>
+				<p>
+					<select name="speisetyp" size="2" multiple>
+						<option value="suess"> süß <option value="herzhaft"> herzhaft <option value="ssauer"> sauer <option value="geschmacklos"> geschmacklos <option value="scharf"> scharf <option value="herb"> herb <option value="mild"> mild
+					</select>
+					<label for="speisetyp">Speisetyp</label>
+				</p>
+				<p>
+					<input id="sa" class="radiobutton"  name="speiseart" type="radio" value="vorspeise">
+					Vorspeise
+					<input class="radiobutton"  name="speiseart" type="radio" value="hauptspeise">
+					Hauptspeise
+					<input class="radiobutton"  name="speiseart" type="radio" value="dessert">
+					Dessert <label for="sa">Speiseart </label>
+				</p>
+				</p>
+				<p>
+					<label>Anzahl der Zutaten</label>
+					<input id="zutaten" type="number" min="1" max="8" step="1" />
+				</p>
+				<p>
+					<input list="restaurants">
+					<label for="restaurants">Auswahl Restaurant</label>
+					<datalist id="restaurants">
+						<option value="MEIERS" label="HH 040/123456">
+						<option value="ZUR LINDE" label="HL 0451/112233">
+						<option value="LEHMANNS" label="B-Mitte 030/6542321">
+						<option value="ALTE ECKE" label="Frankfurt 069/124578">
+						<option value="FUTTERKISTE" label="München 089/112233">
+					</datalist>
+				</p>
+				<p>
+					        <legend>Passwort bestätigen</legend>
+        <label for="password1">Passwort:</label>
+        <input type="password" required id="password1" />
+ 
+        <label for="password2">Passwort bestätigen:</label>
+        <input type="password" required id="password2" />
+				</p>
+				<p>
+					<button id="submit">Abschicken</button>
+				</p>
+			</form>
+		</section>
+		<footer>
+			Gruppe 06 - FH Lübeck - Modul Webprogrammierung -
+		</footer>
+<script>
+	var password1 = document.getElementById('password1');
+	var password2 = document.getElementById('password2');
+	var autorname = document.getElementById('autorname');
+	var zutaten = document.getElementById('zutaten');
+	
+	var checkPasswordValidity = function () {
+		if (password1.value != password2.value) {
+			password2.setCustomValidity('Passwörter müssen übereinstimmen!');
+		} else {
+			password2.setCustomValidity('');
+		}
+	};
+	
+	var checkAutorValidity = function () {
+		if (autorname.value == '') {
+			autorname.setCustomValidity('Nicht leer Lassen');
+			console.log("A");
+		} else{
+			autorname.setCustomValidity('Leer Lassen');
+			console.log("B");
+		}
+	};
+	
+	var checkZutatenValidity = function () {
+		if (zutaten.value > 4) {
+			zutaten.setCustomValidity('Nicht OK' + zutaten.value );
+			console.log("A");
+		} else{
+			zutaten.setCustomValidity('Nicht OK' + zutaten.value );
+			console.log("B");
+		}
+	};
+	
+	password1.addEventListener('change', checkPasswordValidity);
+	password2.addEventListener('change', checkPasswordValidity);
+	autorname.addEventListener('change', checkAutorValidity);
+	zutaten.addEventListener('change', checkZutatenValidity);
+	
+
+
+</script>		
+</html>

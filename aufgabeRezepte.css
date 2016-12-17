@@ -1,0 +1,65 @@
+/* allgemeine angaben */
+*{
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+h1, section {
+    padding-left: 10px;
+}
+
+input {
+    margin: 5px 0px 5px 0px;
+}
+
+.hint {
+    font-size: 0.8em;
+}
+
+#databox{
+    float: right;
+    width: 400px;
+    margin-right: 20px;
+    padding: 20px;
+    border: 1px solid #999999;
+}
+
+/* Angaben für das Formular */
+
+/* Browser Reset */
+input:invalid {
+    box-shadow:none;
+}
+/* ersetzt Asterisk */
+input:required + label::after {
+    content:" *";
+    color:#EE0000;
+}
+
+
+input:focus:invalid {
+    background-color:yellow;
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(255,0,0,1);
+    -moz-box-shadow: 0px 0px 3px 3px rgba(255,0,0,1);
+    box-shadow: 0px 0px 3px 3px rgba(255,0,0,1);
+}
+
+input:required:focus:valid {
+    border-color: rgb(0,130,20);
+    -webkit-box-shadow: 0px 0px 3px 3px rgba(0,130,20,1);
+    -moz-box-shadow: 0px 0px 3px 3px rgba(0,130,20,1);
+    box-shadow: 0px 0px 3px 3px rgba(0,130,20,1);
+}
+
+input{
+    margin-left: 1.3em;
+}
+
+#rezeptform label {
+    width: 150px;
+    vertical-align: bottom;
+    float: left;
+    border-bottom: 1px lightblue solid;
+    border-left: 1px lightblue solid;
+    padding-left: 0.5em;
+}
