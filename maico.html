@@ -10,7 +10,7 @@
 			<h1>Rezepteerfassung</h1>
 		</header>
 		<section>
-			<form id="rezeptform" action="maico.html" method="post" onsubmit="sendeFkt()"> <!-- ergänzung um onsubmit, vllt löschen -->
+			<form id="rezeptform" action="maico.html" method="post" onsubmit="sendeFkt();"> <!-- ergänzung um onsubmit, vllt löschen -->
 				<p>
 					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben -->
 					<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
@@ -35,7 +35,7 @@
 					<label for="speisetyp">Speisetyp</label>
 				</p>
 				<p>
-					<!-- Voespeise hat drei Optionen -->
+					<!-- Vorspeise hat drei Optionen -->
 					<input id="sa" class="radiobutton"  name="speiseart" type="radio" value="vorspeise">
 					Vorspeise
 					<input class="radiobutton"  name="speiseart" type="radio" value="hauptspeise">
@@ -43,14 +43,13 @@
 					<input class="radiobutton"  name="speiseart" type="radio" value="dessert">
 					Dessert <label for="sa">Speiseart </label>
 				</p>
-				</p>
 				<p> <!-- durch type='number' können nur Zahlen angegeben werden, min/max legen Unter/Obergrenze fest, step die Schrittweite:
 				          dafurch kann man nur Zahlen von 1...8 eingeben -->
 					<label>Anzahl der Zutaten</label>
 					<input id="zutaten" type="number" min="1" max="8" step="1" />
 				</p>
 				<p>
-					<input list="restaurants">
+					<input list="restaurants" id="restaurace" type="text">
 					<label for="restaurants">Auswahl Restaurant</label>
 					<datalist id="restaurants">
 						<option value="MEIERS" label="HH 040/123456">
@@ -92,8 +91,8 @@
 	<!-- Werte ohne Validierung -->
 	var rezeptname = document.getElementById('rezeptname');
 	var speiseart = document.getElementById('sa');
-	var restaurant = document.getElementById('restaurants');
-	
+	var restaurant = document.getElementById('restaurace');
+
 	<!-- Variable für Ausgabe -->
 	var ausgabe = document.getElementById('ausgabe');
 	
@@ -155,8 +154,8 @@
 		'anzZutaten': zutaten.value,
 		'restaurant': restaurant.value,
 		'passwort': password1.value,
-		
 		}
+
 		<!--  in Json umwandeln -->
 		sendeObjektJSON = JSON.stringify(sendeObjekt);
 		console.log("Wert des JsonObjekt:");
@@ -174,8 +173,9 @@
 	function sendeFkt() {
 	speichereFormAlsObjekt();
 	<!-- Platzhalter fuer evtl. weitere Funktionen-->
-}
-	
+	}
+
+
 	password1.addEventListener('change', checkPasswordValidity);
 	password2.addEventListener('change', checkPasswordValidity);
 	autorname.addEventListener('change', checkAutorValidity);
