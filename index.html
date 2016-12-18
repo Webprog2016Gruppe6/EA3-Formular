@@ -123,12 +123,12 @@
 	};
 	
 	var checkZutatenValidity = function () {
-		if (zutaten.value > 4) {
-			zutaten.setCustomValidity('Nicht OK' + zutaten.value );
-			console.log("A");
+		if (zutaten.value > 8) {
+			zutaten.setCustomValidity('Nicht OK ' + zutaten.value );
+			console.log("zuviele Zutaten");
 		} else{
-			zutaten.setCustomValidity('Nicht OK' + zutaten.value );
-			console.log("B");
+			zutaten.setCustomValidity('');
+			console.log("nicht zu viele Zutaten");
 		}
 	};
 	
