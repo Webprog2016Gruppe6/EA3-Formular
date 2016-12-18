@@ -1,89 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Aufgabe Rezepteerfassung</title>
-		<link rel="stylesheet" href="aufgabeRezepte.css" type="text/css" />
-	</head>
-	<body>
-		<header>
-			<h1>Rezepteerfassung</h1>
-		</header>
-		<section>
-			<form id="rezeptform" action="index.html" method="post">
-				<p>
-					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben -->
-					<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
-					<label for="rezeptname">Rezeptname</label>
-				</p>
-				<p>
-					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben ; required = Pflichfeld -->
-					<input id="autorname" name="autorname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{1,}" required>
-					<label for="autorname">Autor</label>
-				</p>
-				<p>
-					<!--size: nur ein wert sichtbar, multiple: Mehrere Werte auswählbar -->
-					<select id="speisetyp" name="speisetyp" size="7" multiple>
-						<option value="suess"> süß
-						<option value="herzhaft"> herzhaft
-						<option value="sauer"> sauer
-						<option value="geschmacklos"> geschmacklos
-						<option value="scharf"> scharf
-						<option value="herb"> herb
-						<option value="mild"> mild
-					</select>
-					<label for="speisetyp">Speisetyp</label>
-				</p>
-				<p>
-					<!-- Voespeise hat drei Optionen -->
-					<input id="sa" class="radiobutton"  name="speiseart" type="radio" value="vorspeise">
-					Vorspeise
-					<input class="radiobutton"  name="speiseart" type="radio" value="hauptspeise">
-					Hauptspeise
-					<input class="radiobutton"  name="speiseart" type="radio" value="dessert">
-					Dessert <label for="sa">Speiseart </label>
-				</p>
-				</p>
-				<p> <!-- durch type='number' können nur Zahlen angegeben werden, min/max legen Unter/Obergrenze fest, step die Schrittweite:
+<head>
+	<meta charset="UTF-8">
+	<title>Aufgabe Rezepteerfassung</title>
+	<link rel="stylesheet" href="aufgabeRezepte.css" type="text/css" />
+</head>
+<body>
+<header>
+	<h1>Rezepteerfassung</h1>
+</header>
+<section>
+	<form id="rezeptform" action="" method="post" onsubmit="sendeFkt();return false;"> <!-- ergänzung um onsubmit, vllt löschen -->
+		<p>
+			<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben -->
+			<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
+			<label for="rezeptname">Rezeptname</label>
+		</p>
+		<p>
+			<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben ; required = Pflichfeld -->
+			<input id="autorname" name="autorname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{1,}" required>
+			<label for="autorname">Autor</label>
+		</p>
+		<p>
+			<!--size: nur ein wert sichtbar, multiple: Mehrere Werte auswählbar -->
+			<select id="speisetyp" name="speisetyp" size="7" multiple>
+				<option value="suess"> süß
+				<option value="herzhaft"> herzhaft
+				<option value="sauer"> sauer
+				<option value="geschmacklos"> geschmacklos
+				<option value="scharf"> scharf
+				<option value="herb"> herb
+				<option value="mild"> mild
+			</select>
+			<label for="speisetyp">Speisetyp</label>
+		</p>
+		<p>
+			<!-- Vorspeise hat drei Optionen -->
+			<input id="sa" class="radiobutton"  name="speiseart" type="radio" value="vorspeise">
+			Vorspeise
+			<input class="radiobutton"  name="speiseart" type="radio" value="hauptspeise">
+			Hauptspeise
+			<input class="radiobutton"  name="speiseart" type="radio" value="dessert">
+			Dessert <label for="sa">Speiseart </label>
+		</p>
+		<p> <!-- durch type='number' können nur Zahlen angegeben werden, min/max legen Unter/Obergrenze fest, step die Schrittweite:
 				          dafurch kann man nur Zahlen von 1...8 eingeben -->
-					<label>Anzahl der Zutaten</label>
-					<input id="zutaten" type="number" min="1" max="8" step="1" />
-				</p>
-				<p>
-					<input list="restaurants">
-					<label for="restaurants">Auswahl Restaurant</label>
-					<datalist id="restaurants">
-						<option value="MEIERS" label="HH 040/123456">
-						<option value="ZUR LINDE" label="HL 0451/112233">
-						<option value="LEHMANNS" label="B-Mitte 030/6542321">
-						<option value="ALTE ECKE" label="Frankfurt 069/124578">
-						<option value="FUTTERKISTE" label="München 089/112233">
-					</datalist>
-				</p>
-				<!-- Schnipp - TEST: BITTE ENTFERNEN -->
-				<p>
-					        <legend>Passwort bestätigen</legend>
-        <label for="password1">Passwort:</label>
-        <input type="password" required id="password1" />
- 
-        <label for="password2">Passwort bestätigen:</label>
-        <input type="password" required id="password2" />
-				</p>
-				<!-- Schnapp -->
-				<p>
-					<button id="submit">Abschicken</button>
-				</p>
-			</form>
-		</section>
-		<footer>
-			Gruppe 06 - FH Lübeck - Modul Webprogrammierung -
-		</footer>
+			<label>Anzahl der Zutaten</label>
+			<input id="zutaten" type="number" min="1" max="8" step="1" />
+		</p>
+		<p>
+			<input list="restaurants" id="restaurace" type="text">
+			<label for="restaurants">Auswahl Restaurant</label>
+			<datalist id="restaurants">
+				<option value="MEIERS" label="HH 040/123456">
+				<option value="ZUR LINDE" label="HL 0451/112233">
+				<option value="LEHMANNS" label="B-Mitte 030/6542321">
+				<option value="ALTE ECKE" label="Frankfurt 069/124578">
+				<option value="FUTTERKISTE" label="München 089/112233">
+			</datalist>
+		</p>
+
+		<p>
+			<button id="submit">Abschicken</button>
+		</p>
+	</form>
+</section>
+<!-- Ausgabe -->
+
+<h2>Json Ausgabe</h2>
+<div id="ausgabe1"></div>
+<div id="ausgabe2"></div>
+<footer>
+	Gruppe 06 - FH Lübeck - Modul Webprogrammierung -
+</footer>
 <script>
-	var password1 = document.getElementById('password1');
-	var password2 = document.getElementById('password2');
 	var autorname = document.getElementById('autorname');
 	var zutaten = document.getElementById('zutaten');
 	var speisetyp = document.getElementById('speisetyp');
+	<!-- Werte ohne Validierung -->
+	var rezeptname = document.getElementById('rezeptname');
+	var speiseart = document.getElementById('sa');
+	var restaurant = document.getElementById('restaurace');
+
+	<!-- Variable für Ausgabe -->
+	var ausgabe1 = document.getElementById('ausgabe1');
+	var ausgabe2 = document.getElementById('ausgabe2');
 
 	var checkSpeiseTypValidity = function () {
 		var zaehler = 0;
@@ -104,14 +105,6 @@
 		console.log("Es ändert sich was in der select-Box");
 	};
 
-	var checkPasswordValidity = function () {
-		if (password1.value != password2.value) {
-			password2.setCustomValidity('Passwörter müssen übereinstimmen!');
-		} else {
-			password2.setCustomValidity('');
-		}
-	};
-	
 	var checkAutorValidity = function () {
 		if (autorname.value == '') {
 			autorname.setCustomValidity('Nicht leer Lassen');
@@ -121,7 +114,7 @@
 			console.log("Autor leer gelassen");
 		}
 	};
-	
+
 	var checkZutatenValidity = function () {
 		if (zutaten.value > 8) {
 			zutaten.setCustomValidity('Nicht OK ' + zutaten.value );
@@ -131,14 +124,56 @@
 			console.log("nicht zu viele Zutaten");
 		}
 	};
-	
-	password1.addEventListener('change', checkPasswordValidity);
-	password2.addEventListener('change', checkPasswordValidity);
+
+	function speichereFormAlsObjekt() {
+
+		var sendeObjekt = {
+			'rezeptname': rezeptname.value,
+			'autor': autorname.value,
+			'speisetyp': speisetyp.value,
+			'speiseart': speiseart.value,
+			'anzZutaten': zutaten.value,
+			'restaurant': restaurant.value,
+		}
+
+		<!--  JSON.stringify() Methode konvertiert einen JavaScript-Wert in einen JSON-String.  -->
+		sendeObjektJSON = JSON.stringify(sendeObjekt);
+		console.log("Wert des JsonObjekt:");
+		console.log(sendeObjektJSON);
+		<!--  Kontrollausgabe -->
+		ausgabe1.innerHTML = "<pre>" +sendeObjektJSON + "</pre>";
+
+
+		<!--  zurückwandeln und Ausgabe -->
+		ausgabe2.innerHTML = "<ul>";
+		JSON.parse(sendeObjektJSON, (key, value) => {
+			console.log(key + " und " + value);
+		if (typeof value !== 'object'){
+			ausgabe2.innerHTML += "<li><b>" + key + ":</b> " + value  + "</li>";
+		}
+		ausgabe2.innerHTML += "</ul>";
+		return value;
+	});
+
+
+
+	};
+
+	function sendeFkt() {
+		speichereFormAlsObjekt();
+
+		<!-- Platzhalter fuer evtl. weitere Funktionen-->
+	}
+
+
 	autorname.addEventListener('change', checkAutorValidity);
 	zutaten.addEventListener('change', checkZutatenValidity);
 	speisetyp.addEventListener('change', checkSpeiseTypValidity);
-	
 
 
-</script>		
+
+
+
+
+</script>
 </html>
