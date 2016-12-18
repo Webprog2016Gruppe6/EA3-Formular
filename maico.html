@@ -136,19 +136,26 @@
 		'restaurant': restaurant.value,
 		}
 
-		<!--  in Json umwandeln -->
+		<!--  JSON.stringify() Methode konvertiert einen JavaScript-Wert in einen JSON-String.  -->
 		sendeObjektJSON = JSON.stringify(sendeObjekt);
 		console.log("Wert des JsonObjekt:");
 		console.log(sendeObjektJSON);
+		<!--  Kontrollausgabe -->
 		ausgabe1.innerHTML = "<pre>" +sendeObjektJSON + "</pre>";
 
 
-		//alert(JSON.parse(sendeObjektJSON).toSource());
-		<!--  zurückwandeln -->
-		//newSendeObjekt = JSON.parse(sendeObjektJSON);
-		ausgabe2.innerHTML = "<pre>" +sendeObjektJSON + "</pre>";
+		<!--  zurückwandeln und Ausgabe -->
+		ausgabe2.innerHTML = "<ul>";
+		JSON.parse(sendeObjektJSON, (key, value) => {
+			console.log(key + " und " + value);
+		if (typeof value !== 'object'){
+			ausgabe2.innerHTML += "<li><b>" + key + ":</b> " + value  + "</li>";
+		}
+		ausgabe2.innerHTML += "</ul>";
+		return value;
+	});
 
-		//console.log(newSendeObjekt);
+
 
 	};
 	
