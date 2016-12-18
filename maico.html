@@ -59,32 +59,20 @@
 						<option value="FUTTERKISTE" label="München 089/112233">
 					</datalist>
 				</p>
-				<!-- Schnipp - TEST: BITTE ENTFERNEN -->
-				<p>
-					        <legend>Passwort bestätigen</legend>
-        <label for="password1">Passwort:</label>
-        <input type="password" required id="password1" />
- 
-        <label for="password2">Passwort bestätigen:</label>
-        <input type="password" required id="password2" />
-				</p>
-				<!-- Schnapp -->
+
 				<p>
 					<button id="submit">Abschicken</button>
 				</p>
 			</form>
 		</section>
 		<!-- Ausgabe -->
-		<div class="results">
+
 		<h2>Json Ausgabe</h2>
-		<p id = "ausgabe">Hier ändert sich was</p>
-		</div>
+		<div class="results"></div>
 		<footer>
 			Gruppe 06 - FH Lübeck - Modul Webprogrammierung -
 		</footer>
 <script>
-	var password1 = document.getElementById('password1');
-	var password2 = document.getElementById('password2');
 	var autorname = document.getElementById('autorname');
 	var zutaten = document.getElementById('zutaten');
 	var speisetyp = document.getElementById('speisetyp');
@@ -115,14 +103,7 @@
 		}
 		console.log("Es ändert sich was in der select-Box");
 	};
-	var checkPasswordValidity = function () {
-		if (password1.value != password2.value) {
-			password2.setCustomValidity('Passwörter müssen übereinstimmen!');
-		} else {
-			password2.setCustomValidity('');
-		}
-	};
-	
+
 	var checkAutorValidity = function () {
 		if (autorname.value == '') {
 			autorname.setCustomValidity('Nicht leer Lassen');
@@ -145,7 +126,6 @@
 	
 	function speichereFormAlsObjekt() {
 
-		
 		var sendeObjekt = {
 		'rezeptname': rezeptname.value,
 		'autor': autorname.value,
@@ -153,31 +133,27 @@
 		'speiseart': speiseart.value,
 		'anzZutaten': zutaten.value,
 		'restaurant': restaurant.value,
-		'passwort': password1.value,
 		}
 
 		<!--  in Json umwandeln -->
 		sendeObjektJSON = JSON.stringify(sendeObjekt);
 		console.log("Wert des JsonObjekt:");
 		console.log(sendeObjektJSON);
-		
+
 		<!--  zurückwandeln -->
 		newSendeObjekt = JSON.parse(sendeObjektJSON);
 		ausgabe.innerHTML = newSendeObjekt.toSource();
 		console.log("Wert des Objekt nach Umwandlung:");
 		console.log(newSendeObjekt);
-		
-		
+
 	};
 	
 	function sendeFkt() {
-	speichereFormAlsObjekt();
+		speichereFormAlsObjekt();
 	<!-- Platzhalter fuer evtl. weitere Funktionen-->
 	}
 
 
-	password1.addEventListener('change', checkPasswordValidity);
-	password2.addEventListener('change', checkPasswordValidity);
 	autorname.addEventListener('change', checkAutorValidity);
 	zutaten.addEventListener('change', checkZutatenValidity);
 	speisetyp.addEventListener('change', checkSpeiseTypValidity);
