@@ -10,7 +10,7 @@
 			<h1>Rezepteerfassung</h1>
 		</header>
 		<section>
-			<form id="rezeptform" action="index.html" method="post">
+			<form id="rezeptform" action="index.html" method="post" onsubmit="sendeFkt()"> <!-- ergänzung um onsubmit, vllt löschen -->
 				<p>
 					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben -->
 					<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
@@ -75,6 +75,11 @@
 				</p>
 			</form>
 		</section>
+		<!-- Ausgabe -->
+		<div class="results">
+		<h2>Json Ausgabe</h2>
+		<p id = "ausgabe">Hier ändert sich was</p>
+		</div>
 		<footer>
 			Gruppe 06 - FH Lübeck - Modul Webprogrammierung -
 		</footer>
@@ -84,7 +89,15 @@
 	var autorname = document.getElementById('autorname');
 	var zutaten = document.getElementById('zutaten');
 	var speisetyp = document.getElementById('speisetyp');
-
+	<!-- Werte ohne Validierung -->
+	var rezeptname = document.getElementById('rezeptname');
+	var speiseart = document.getElementById('sa');
+	var restaurant = document.getElementById('restaurants');
+	
+	<!-- Variable für Ausgabe -->
+	var ausgabe = document.getElementById('ausgabe');
+	
+	
 	var checkSpeiseTypValidity = function () {
 		var zaehler = 0;
 		for (var i = 0; i < speisetyp.length; i++){
@@ -103,7 +116,6 @@
 		}
 		console.log("Es ändert sich was in der select-Box");
 	};
-
 	var checkPasswordValidity = function () {
 		if (password1.value != password2.value) {
 			password2.setCustomValidity('Passwörter müssen übereinstimmen!');
@@ -124,13 +136,45 @@
 	
 	var checkZutatenValidity = function () {
 		if (zutaten.value > 4) {
-			zutaten.setCustomValidity('Nicht OK' + zutaten.value );
+			zutaten.setCustomValidity('Nicht OK ' + zutaten.value );
 			console.log("A");
 		} else{
-			zutaten.setCustomValidity('Nicht OK' + zutaten.value );
+			zutaten.setCustomValidity('Nicht OK ' + zutaten.value );
 			console.log("B");
 		}
 	};
+	
+	function speichereFormAlsObjekt() {
+
+		
+		var sendeObjekt = {
+		'rezeptname': rezeptname.value,
+		'autor': autorname.value,
+		'speisetyp': speisetyp.value,
+		'speiseart': speiseart.value,
+		'anzZutaten': zutaten.value,
+		'restaurant': restaurant.value,
+		'passwort': password1.value,
+		
+		}
+		<!--  in Json umwandeln -->
+		sendeObjektJSON = JSON.stringify(sendeObjekt);
+		console.log("Wert des JsonObjekt:");
+		console.log(sendeObjektJSON);
+		
+		<!--  zurückwandeln -->
+		newSendeObjekt = JSON.parse(sendeObjektJSON);
+		ausgabe.innerHTML = newSendeObjekt.toSource();
+		console.log("Wert des Objekt nach Umwandlung:");
+		console.log(newSendeObjekt);
+		
+		
+	};
+	
+	function sendeFkt() {
+	speichereFormAlsObjekt();
+	<!-- Platzhalter fuer evtl. weitere Funktionen-->
+}
 	
 	password1.addEventListener('change', checkPasswordValidity);
 	password2.addEventListener('change', checkPasswordValidity);
@@ -138,7 +182,10 @@
 	zutaten.addEventListener('change', checkZutatenValidity);
 	speisetyp.addEventListener('change', checkSpeiseTypValidity);
 	
-
-
+	
+	
+	
+	
+	
 </script>		
 </html>
