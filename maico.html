@@ -10,7 +10,7 @@
 			<h1>Rezepteerfassung</h1>
 		</header>
 		<section>
-			<form id="rezeptform" action="maico.html" method="post" onsubmit="sendeFkt();"> <!-- ergänzung um onsubmit, vllt löschen -->
+			<form id="rezeptform" action="" method="post" onsubmit="sendeFkt();return false;"> <!-- ergänzung um onsubmit, vllt löschen -->
 				<p>
 					<!-- pattern Atribut gibt vor, mindestens 5 Buchstaben -->
 					<input id="rezeptname" name="rezeptname" type="text" value="" maxlength="250" pattern="[a-zA-ZÄÖÜäöüß ]{5,}">
@@ -68,7 +68,8 @@
 		<!-- Ausgabe -->
 
 		<h2>Json Ausgabe</h2>
-		<div class="results"></div>
+		<div id="ausgabe1"></div>
+		<div id="ausgabe2"></div>
 		<footer>
 			Gruppe 06 - FH Lübeck - Modul Webprogrammierung -
 		</footer>
@@ -82,8 +83,8 @@
 	var restaurant = document.getElementById('restaurace');
 
 	<!-- Variable für Ausgabe -->
-	var ausgabe = document.getElementById('ausgabe');
-	
+	var ausgabe1 = document.getElementById('ausgabe1');
+	var ausgabe2 = document.getElementById('ausgabe2');
 	
 	var checkSpeiseTypValidity = function () {
 		var zaehler = 0;
@@ -139,17 +140,21 @@
 		sendeObjektJSON = JSON.stringify(sendeObjekt);
 		console.log("Wert des JsonObjekt:");
 		console.log(sendeObjektJSON);
+		ausgabe1.innerHTML = "<pre>" +sendeObjektJSON + "</pre>";
 
+
+		//alert(JSON.parse(sendeObjektJSON).toSource());
 		<!--  zurückwandeln -->
-		newSendeObjekt = JSON.parse(sendeObjektJSON);
-		ausgabe.innerHTML = newSendeObjekt.toSource();
-		console.log("Wert des Objekt nach Umwandlung:");
-		console.log(newSendeObjekt);
+		//newSendeObjekt = JSON.parse(sendeObjektJSON);
+		ausgabe2.innerHTML = "<pre>" +sendeObjektJSON + "</pre>";
+
+		//console.log(newSendeObjekt);
 
 	};
 	
 	function sendeFkt() {
 		speichereFormAlsObjekt();
+
 	<!-- Platzhalter fuer evtl. weitere Funktionen-->
 	}
 
